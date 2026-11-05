@@ -4,11 +4,13 @@
 
 Final-year IT students and fresh IT graduates in Jordan cannot turn what they studied into job-ready skills. They start roadmaps, courses and tutorials, then stop the moment a task requires actual execution or coding, because nothing breaks the work into doable steps and nobody holds them accountable.
 
+**What it costs them:** months after graduation spent on unfinished courses, money spent on courses they never complete, and no portfolio project to show when they apply for junior roles.
+
 ## 2. Who Has It
 
 Final-year IT students and fresh IT graduates in Jordan who are targeting a junior role and feel the gap between their degree and real job postings.
 
-MVP test group: 5–10 students from our college.
+MVP test group: 10–15 invited students from my college.
 
 ## 3. Today, Without It
 
@@ -22,7 +24,7 @@ Common outcome: students stop at the first hands-on task, with no one asking "wh
 
 Measured at week 8:
 
-- **Success:** 5–10 students complete a 14-day roadmap and one practical project that has been reviewed.
+- **Success:** at least 3 of the 10–15 invited students complete a 14-day roadmap within 21 days, and I review their final project.
 - **Failure:** zero completions, or all participants drop out within the first 4 days.
 
 Tracked during the test:
@@ -35,26 +37,22 @@ Tracked during the test:
 
 **In (MVP):**
 
-1. **Action plan from a job description.** The student pastes a job posting; the tool generates a 14-day personalised plan aimed at one practical project.
-2. **Daily micro-tasks with progress tracking.** Each day has a task of about 30 minutes. A day is complete only when the student ticks the task and uploads code or a result.
+1. **Action plan from a job description.** The student pastes a job posting; the AI inside the app generates a 14-day personalised plan aimed at one practical project. If the student has no posting, or the AI fails, they pick a ready-made role template.
+2. **Daily micro-tasks with progress tracking.** Each day has a task of about 30 minutes. A day is complete only when the student submits a link to their code or result.
 
-**Out (MVP):**
-
-- Skills assessment
-- Mentor or professional network
-- Mock interviews
-- Advanced job-description or market analysis
-- Hiring pipeline or job placement
+**Out (MVP):** skills assessment, mentor network, mock interviews, market analysis, job placement, notifications and file uploads. The full list, with reasons, is in [`scope.md`](scope.md).
 
 ## 6. Risks and Unknowns
 
 | Risk / unknown | Why it matters |
 |---|---|
-| Evidence is personal experience and observation of peers only | The cause of dropout (no accountability) is assumed, not tested. Interview 3–4 test students before building. |
-| Students may see it as "just another AI list generator" | Differentiation rests entirely on the daily task and upload loop. |
-| Students may still drop out within days | Exams, part-time work or boredom may outweigh any tool. |
-| AI-generated plans may be wrong or unrealistic | No one checks plan quality unless a review step is defined. |
+| Evidence is personal experience and observation of peers only | The cause of dropout (no accountability) is assumed, not tested. The week-8 trial will test it: completion rate and dropout day show whether the daily task and link loop helps. |
+| Students may see it as "just another AI list generator" | Differentiation rests entirely on the daily task and link loop. |
+| Students may still drop out within days | Exams, part-time work or boredom may outweigh any tool. The app sends no reminders. |
+| AI plans may be wrong or unrealistic | The app checks each plan's structure, not its quality. I only see the work at the final review. |
+| The AI's free tier may change or stop working | Students then get templates only, which weakens the main difference from roadmap.sh. |
+| Any valid link unlocks the next day | A student can submit a fake link. Real work is only checked at the final review. |
 | 14 days may be too short for a project an employer values | Project size must match 14 × 30 minutes. |
-| Who reviews projects is not defined | "Reviewed" in section 4 cannot be measured until a reviewer and criteria are set. |
-| Job postings may be too vague to plan from | Many local postings are generic templates. |
-| Student data (uploads, progress) must be stored | Needs basic consent and privacy handling. |
+| Job postings may be too vague to plan from | Many local postings are generic templates, so the AI's plan may be generic too. |
+| Student data (emails, links, progress) must be stored | Needs basic consent and privacy handling. |
+| Solo developer, alongside coursework | No one to cover if exams or illness take a week. Scope must stay at the two core components. |

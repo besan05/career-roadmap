@@ -52,7 +52,7 @@ Three tools students already use to get job-ready. Prices checked October 2026 (
 
 ## Why ours instead?
 
-**ChatGPT, roadmap.sh and Coursera all hand the student a plan and leave execution to them; ours turns one real job posting into 14 daily 30-minute tasks, and a day only counts once the student uploads code or a result, so progress reflects work actually done.**
+**ChatGPT, roadmap.sh and Coursera all hand the student a plan and leave execution to them; ours turns one real job posting into 14 daily 30-minute tasks, and a day only counts once the student submits a link to their code or result, so progress reflects work actually done.**
 
 ## Sources
 
