@@ -21,7 +21,7 @@ Three tools students already use to get job-ready. Prices checked October 2026 (
 |---|---|
 | **Who it is for** | Developers; it describes its content as helping them "choose your path and grow in your career." |
 | **What it does well** | Community-maintained, role-based roadmaps (frontend, backend, DevOps, AI engineering and more), project ideas, best-practice guides, and progress tracking for signed-in users. |
-| **What it misses** | Roadmaps are generic per role, not built from a specific job posting. They map the whole field (months of topics) rather than a 14-day path to one project. Tracking is self-reported ticking, with no proof of work and no follow-up when a student stops. |
+| **What it misses** | Roadmaps are generic per role, not built from a specific job posting. They map the whole field (months of topics) rather than a 10-day path to one project. Tracking is self-reported ticking, with no proof of work and no follow-up when a student stops. |
 | **What it costs** | Freemium. Roadmaps are free; an account upgrade unlocks premium AI features. |
 
 **What I saw when I tried it:** (fill in after using it for 10 minutes)
@@ -52,7 +52,7 @@ Three tools students already use to get job-ready. Prices checked October 2026 (
 
 ## Why ours instead?
 
-**ChatGPT, roadmap.sh and Coursera all hand the student a plan and leave execution to them; ours turns one real job posting into 14 daily 30-minute tasks, and a day only counts once the student submits a link to their code or result, so progress reflects work actually done.**
+**ChatGPT, roadmap.sh and Coursera all hand the student a plan and leave execution to them; ours turns one real job posting into 10 daily 30-minute tasks, and a day only counts once the student submits a link to their code or result, so progress reflects work actually done.**
 
 ## Sources
 

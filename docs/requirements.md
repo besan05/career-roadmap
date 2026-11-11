@@ -31,23 +31,23 @@ Done when: logging in as the creator opens the progress view; logging in as a st
 **R4 Choose a target.** On first login, a student either pastes a job description or picks a role template. There is no skill-level rating.
 Done when: a new student cannot reach day 1 without doing one of the two.
 
-**R5 AI plan from a job description.** When a student pastes a job description, the app sends only the posting text to the AI model and shows the generated 14-day plan on the same visit. A posting may be up to 6,000 characters. A student can create a plan from a posting up to 3 times before day 1; after that, only templates are offered. An attempt counts only when the AI answers (with a plan, a broken plan, or a refusal). The automatic retry, timeouts, outages and rate limits do not count.
-Done when: pasting a real posting shows a 14-day plan within about a minute, with no action from the creator; a posting over 6,000 characters is refused with a message; with the AI key switched off, failed tries leave the attempts unchanged; after 3 counted attempts, only the templates are shown.
+**R5 AI plan from a job description.** When a student pastes a job description, the app sends only the posting text to the AI model and shows the generated 10-day plan on the same visit. A posting may be up to 6,000 characters. A student can create a plan from a posting up to 3 times before day 1; after that, only templates are offered. An attempt counts only when the AI answers (with a plan, a broken plan, or a refusal). The automatic retry, timeouts, outages and rate limits do not count.
+Done when: pasting a real posting shows a 10-day plan within about a minute, with no action from the creator; a posting over 6,000 characters is refused with a message; with the AI key switched off, failed tries leave the attempts unchanged; after 3 counted attempts, only the templates are shown.
 
 **R5b Not an IT job posting.** The AI may refuse a text that is not an IT job posting. The student then sees: *"This doesn't look like an IT job posting. Paste a different one or pick a role below."* No plan is saved.
 Done when: pasting "hello" or a nursing job posting shows the message and saves no plan.
 
-**R6 Plan check.** Before saving, the app checks the AI's plan: a role title, and exactly 14 days in order, each with a title, task instructions for about 30 minutes, and a description of the evidence expected. If the check fails, it asks the AI once more.
-Done when: a deliberately broken response (13 days, a missing field, or no role title) is never shown to the student.
+**R6 Plan check.** Before saving, the app checks the AI's plan: a role title, a project goal (one sentence on what the student will have built by day 10), and exactly 10 days in order, each with a title, task instructions for about 30 minutes, and a description of the evidence expected. If the check fails, it asks the AI once more.
+Done when: a deliberately broken response (9 days, a missing field, no role title or no project goal) is never shown to the student.
 
-**R6b Plan content.** The instructions sent to the AI (`app/ai/prompt.txt`) ask for: one project sized for 14 × 30 minutes; day 1 sets up a public repository; tasks point to existing free lessons instead of teaching from scratch; the expected evidence of every day is something that can be linked. The code checks only the structure (R6); content is checked by me reading sample plans.
+**R6b Plan content.** The instructions sent to the AI (`app/ai/prompt.txt`) ask for: one project sized for 10 × 30 minutes; day 1 sets up a public repository; tasks point to existing free lessons instead of teaching from scratch; the expected evidence of every day is something that can be linked. The code checks only the structure (R6); content is checked by me reading sample plans.
 Done when: `prompt.txt` asks for all four, and three plans made from real postings meet them when I read them (A4).
 
 **R7 Template fallback.** If the second attempt also fails, or the AI service is unavailable or times out, the student sees a short message and the role templates.
 Done when: with the AI key switched off, pasting a posting shows the message and the template list, not an error page.
 
-**R8 Role templates.** The app ships with pre-written 14-day plans, at least *Junior Frontend Developer* and *Junior Data Analyst*. Picking one loads it immediately.
-Done when: picking each template shows its 14-day plan without any AI call.
+**R8 Role templates.** The app ships with pre-written 10-day plans, at least *Junior Frontend Developer* and *Junior Data Analyst*. Picking one loads it immediately.
+Done when: picking each template shows its 10-day plan without any AI call.
 
 **R9 One plan per student.** Before submitting day 1, a student can discard their plan and choose again. After day 1, the plan is fixed.
 Done when: the "choose again" option disappears once day 1 is submitted.
@@ -74,8 +74,8 @@ Done when: the button opens the posting for posting-based plans and does not app
 
 ### Completion
 
-**R15 Completion screen.** After day 14 is submitted, the student sees a screen confirming all 14 steps are submitted.
-Done when: the screen appears after day 14 and cannot be reached before it.
+**R15 Completion screen.** After day 10 is submitted, the student sees a screen confirming all 10 steps are submitted.
+Done when: the screen appears after day 10 and cannot be reached before it.
 
 ### Creator
 
@@ -126,7 +126,7 @@ Done when: the request sent to the AI contains only the posting and the instruct
 Supports section 4 of [`brief.md`](brief.md). The Demo Student is excluded from every number.
 
 - **Invited:** 10–15 students.
-- **Completed:** all 14 days submitted within **21 days** of the student's start time, and marked reviewed by the creator.
+- **Completed:** all 10 days submitted within **10 days** of the student's start time, and marked reviewed by the creator.
 - **Success:** at least **3** students complete.
 - **Recorded automatically:** start time, every submission time, current day. From these: completions, days taken, and the day each dropout stopped.
 

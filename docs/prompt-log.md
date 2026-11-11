@@ -91,3 +91,21 @@ Every prompt used to think this project through, in order: what I asked, and wha
 - [ ] Fresh-chat test on the whole /docs folder (Task 03)
 - [ ] Workflow holes prompt on workflow.md (Task 02)
 - [ ] Try each competitor for 10 minutes, then update research.md (Task 02)
+
+## Task 04 — Design and backlog
+
+### 19. Designing the Roadmap screen first
+**Asked:** Mock up the main screen from brief, screens, requirements and data-model, then list what was decided for me and any field not in the data model.
+**Decided:** The screen had no picture of where the 10 days lead, so I added `project_goal` (D65). Plans cut from 14 to 10 days to fit three build weeks (D64).
+
+### 20. Choosing a look
+**Asked:** Show several styles side by side.
+**Decided:** Tried seven; chose "Sky & lilac" (D67). Rejected Butter & rose because it read as aimed at girls, and the testers are mixed.
+
+### 21. The other five screens and their four states
+**Asked:** Design each screen with Empty, Loading, Error and Full.
+**Decided:** Wrote all of them in design.md. Where a state does not apply (no Loading on Completion), I wrote why instead of inventing one.
+
+### 22. Cutting tickets
+**Asked:** Cut the design into tickets with Why, Done when and Touches.
+**Decided:** 14 tickets. The student loop works without AI after ticket 08; the AI spike comes second to answer the biggest risk early.

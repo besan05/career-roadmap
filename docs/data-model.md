@@ -12,7 +12,7 @@ What the app stores and how the pieces relate. Supports [`requirements.md`](requ
 ## Overview
 
 ```
-invite_codes ──0..1:1── users ──1:0..1── roadmaps ──1:14── roadmap_days ──1:many── submissions
+invite_codes ──0..1:1── users ──1:0..1── roadmaps ──1:10── roadmap_days ──1:many── submissions
 
 plans/*.json  (template files in the repo, copied into roadmap_days)
 ```
@@ -57,19 +57,20 @@ One student's plan. A student has at most one.
 | `source` | `template` \| `posting` | |
 | `template_id` | text, nullable | e.g. `junior-frontend`. Empty for posting-based plans |
 | `role_title` | text | From the template, or from the AI. Shown at the top of the Roadmap screen |
+| `project_goal` | text | One sentence: what the student will have built by day 10. From the template, or from the AI. Shown on the Roadmap screen (D65) |
 | `job_posting` | text, nullable | Posting-based plans only. As pasted, up to 6,000 characters |
 | `started_at` | timestamp | When the plan was created |
 | `reviewed_at` | timestamp, nullable | Empty = not reviewed. Set by the creator (R18) |
 
 ### `roadmap_days`
 
-The 14 steps of one roadmap.
+The 10 steps of one roadmap.
 
 | Field | Type | Notes |
 |---|---|---|
 | `id` | id | Primary key |
 | `roadmap_id` | → `roadmaps.id` | |
-| `day_number` | integer, 1–14 | Unique per roadmap |
+| `day_number` | integer, 1–10 | Unique per roadmap |
 | `title` | text | |
 | `instructions` | text | About 30 minutes of work |
 | `expected_evidence` | text | What link to submit, e.g. "GitHub commit adding the navbar" |
@@ -98,6 +99,7 @@ Stored in the repo as `plans/<template_id>.json`, at least `junior-frontend` and
 {
   "template_id": "junior-frontend",
   "role_title": "Junior Frontend Developer",
+  "project_goal": "A live portfolio dashboard that loads real data and filters it by category.",
   "description": "HTML, CSS, JavaScript and one deployed project.",
   "days": [
     {
@@ -112,9 +114,9 @@ Stored in the repo as `plans/<template_id>.json`, at least `junior-frontend` and
 
 ### AI plans
 
-The AI is asked to return only `role_title` and `days`, in the same shape. No `template_id` or `description`.
+The AI is asked to return only `role_title`, `project_goal` and `days`, in the same shape. No `template_id` or `description`.
 
-A plan is valid only if it has a role title and exactly 14 days, numbered 1–14, each with all three fields filled (R6). An invalid plan is never saved.
+A plan is valid only if it has a role title, a project goal and exactly 10 days, numbered 1–10, each with all three fields filled (R6). An invalid plan is never saved.
 
 ## Derived values (calculated, not stored)
 
@@ -124,7 +126,7 @@ A plan is valid only if it has a role title and exactly 14 days, numbered 1–14
 | Current day | Lowest `day_number` without an active submission |
 | Locked day | Any day after the current day |
 | Days completed | Count of days with an active submission |
-| Finished | All 14 days completed |
+| Finished | All 10 days completed |
 | First submission time of a day | Earliest `submitted_at` for that day, including replaced ones |
 
 ## Landing state after login
@@ -144,10 +146,10 @@ Before day 1 is submitted, a student can discard their plan: the roadmap and its
 
 Users with `is_demo = yes` are excluded from every number.
 
-- **Completed:** first submission time of day 14 is within **21 days** of `started_at`, and `reviewed_at` is set.
+- **Completed:** first submission time of day 10 is within **10 days** of `started_at`, and `reviewed_at` is set.
 - **Success:** at least 3 students completed.
 - **Days taken per step:** difference between first submission times of consecutive days.
-- **Dropout day:** current day of a student who has not finished after 21 days.
+- **Dropout day:** current day of a student who has not finished after 10 days.
 
 ## Creator actions in the database
 

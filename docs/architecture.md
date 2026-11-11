@@ -31,8 +31,8 @@ The shape of the system: what parts exist and what each is responsible for. Spec
 | **AI client** | Sends a pasted posting with the instructions in `app/ai/prompt.txt` to the AI model and returns its answer. 30-second timeout per attempt. | Sends anything personal (N7). Saves anything. Decides whether a plan is valid: that is Rules' job. |
 | **Data access** | All reads and writes to the database, following [`data-model.md`](data-model.md). | Changes a submission, except `unlock` setting `replaced_at` once. Deletes one, except through `reset-demo`. |
 | **Database** | Stores users, invite codes, roadmaps, days and submissions. | Holds files or names. |
-| **AI model** | Turns a posting into a role title and a 14-day plan in the agreed JSON shape. | Is trusted: its answer is always checked before saving. |
-| **plans/** | Pre-written 14-day templates as JSON files in the repo. | Changes a student's plan after it has been copied. |
+| **AI model** | Turns a posting into a role title and a 10-day plan in the agreed JSON shape. | Is trusted: its answer is always checked before saving. |
+| **plans/** | Pre-written 10-day templates as JSON files in the repo. | Changes a student's plan after it has been copied. |
 | **Creator scripts** | The creator's actions, run from the command line. Each validates its input before writing. | Runs inside the web app or has a screen. |
 
 ## Creator scripts
@@ -44,10 +44,10 @@ All scripts are Flask CLI commands registered in the app (`flask create-invite`)
 | `create-creator <email>` | Creates the creator account and prints a password once | No creator exists yet |
 | `create-invite` | Creates an invite code and prints it once | — |
 | `create-demo <email>` | Creates the Demo Student and prints a password once | No Demo Student exists yet |
-| `check-template <file.json>` | Validates a template without writing anything | Role title; exactly 14 days, numbered 1–14, all fields present |
+| `check-template <file.json>` | Validates a template without writing anything | Role title; project goal; exactly 10 days, numbered 1–10, all fields present |
 | `reset-password <email>` | Sets a temporary password and prints it once | User exists |
 | `unlock <email> <day>` | Marks the active submission replaced | Day has an active submission |
-| `mark-reviewed <email>` | Sets `reviewed_at` | All 14 days completed |
+| `mark-reviewed <email>` | Sets `reviewed_at` | All 10 days completed |
 | `reset-demo` | Deletes the Demo Student's plan and submissions, resets attempts | Only touches the user with `is_demo = yes` (D51) |
 
 Codes and passwords are printed once and never stored in plain text. I keep my own list outside the app.
@@ -77,9 +77,9 @@ Any failed check → no account is created, and the student sees why.
 3. AI client sends the posting and the instructions in `app/ai/prompt.txt` to the AI model (30-second timeout).
 4. If the AI answers, the attempt is counted once (the retry below never counts again). Timeouts, outages and rate limits are not counted.
 5. If the AI refused (not an IT job posting) → nothing is saved; the student sees the R5b message.
-6. Rules check the answer: a role title, exactly 14 days, numbered 1–14, all fields filled.
+6. Rules check the answer: a role title, a project goal, exactly 10 days, numbered 1–10, all fields filled.
 7. If the check fails or the call times out, steps 3 and 6 run once more.
-8. Valid → a roadmap and its 14 days are saved with `started_at` from the server; **Roadmap** opens on day 1.
+8. Valid → a roadmap and its 10 days are saved with `started_at` from the server; **Roadmap** opens on day 1.
 9. Second failure or AI error → nothing is saved; the student sees a short message and the templates.
 
 While steps 4–7 run, the browser shows a loading message and the button is disabled. The single free worker is busy for up to about a minute (D46).
@@ -88,7 +88,7 @@ While steps 4–7 run, the browser shows a loading message and the button is dis
 
 1. Student picks a role.
 2. Rules check they have no roadmap.
-3. The template's 14 days are **copied** into a new roadmap, with `started_at` set by the server.
+3. The template's 10 days are **copied** into a new roadmap, with `started_at` set by the server.
 4. Roadmap screen opens on day 1.
 
 ### Choosing again (before day 1 only)
@@ -102,7 +102,7 @@ While steps 4–7 run, the browser shows a loading message and the button is dis
 1. Student enters a link and confirms.
 2. Rules check: logged in, the day belongs to this student, it is their **current** day, the link is a valid URL.
 3. Data access saves the submission with the **server's** time.
-4. The next day unlocks; after day 14, the Completion screen opens.
+4. The next day unlocks; after day 10, the Completion screen opens.
 
 Any failed check → nothing is saved, and the student sees an error.
 

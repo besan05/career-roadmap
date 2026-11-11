@@ -109,6 +109,15 @@ A model that had never seen the project read the folder and asked these. These a
 | D62 | 2026-11-05 | No nudging testers during the test. I answer only when they contact me (e.g. a forgotten password) | A1 tests whether the evidence gate alone keeps students going; nudges would spoil it | Weekly check-ins | — |
 | D63 | 2026-11-05 | All invite codes are sent on day 1 of week 6. Student data is deleted when the test ends, with no "keep it" option | Gives every tester the full 21 days before measuring; one clear consent text | Staggered invites; optional keeping | — |
 
+## Task 04: fitting the schedule (2026-11-10)
+
+| # | Date | Decision | Why | Rejected | Replaces |
+|---|---|---|---|---|---|
+| D64 | 2026-11-10 | Plans have **10 days**, not 14. A completion counts within **14 days** of starting, not 21. Testers start on day 1 of week 7 | There are only three build weeks (5–7). A 14-day plan with a 21-day window starting in week 6 left one build week and ran past Demo Night | Keeping 14 days and measuring only partial progress; starting the test before the app is finished | D16, the 14-day plan in D4 and D33 |
+| D65 | 2026-11-11 | New field `roadmaps.project_goal`: one sentence on what the student will have built by day 10, shown on the Roadmap screen. Templates carry it; the AI must return it; a plan without it fails the check | Designing the Roadmap screen showed it lacked a destination: a list of tasks with no picture of the finished project. The data did not exist, so it was added on purpose | Leaving the screen without a goal; deriving the goal from the last day's title | — |
+| D66 | 2026-11-11 | Pastel look: soft backgrounds (lavender, mint, peach, sky) with dark text and a deep lavender for buttons | Calm and encouraging for a learning tool; dark text keeps it readable | The first blue-and-grey design, which felt too plain | — |
+| D67 | 2026-11-11 | Final look "Sky & lilac": sky-blue band at the top, lilac for the goal and the Today label, blue buttons, dark text. New layout: a top band with the role, the project goal, a progress ring and a 10-step journey line; today's task large on the left; a compact list of the 10 days on the right | Chosen from seven styles on the design canvas. The most neutral pastel for a mixed group of IT students; the first layout felt like a plain list | Midnight (dark), Sunrise (teal and coral), Peach & mint, Butter & rose (read as aimed at girls), Butter & teal | D66 |
+
 ## Arguments with the model
 
 - **Country-based plans.** I wanted plans per country. The model pointed out this needs the market data I already ruled out in Task 01, and that a local posting already gives a local plan. I agreed (D42).
@@ -133,4 +142,5 @@ Written down so the test can prove them wrong:
 - [x] `brief.md`: sections 2, 4 and 5 updated for D33, D37 and D41.
 - [x] README: one-liner and status updated.
 - [ ] Week-3 spike: one real AI call from PythonAnywhere (D54, D55, A5).
+- [x] Plans shortened to 10 days (D64): all docs, README, brief and workflow updated.
 - [ ] Confirm the Demo Night date and write it in `plan.md`.
