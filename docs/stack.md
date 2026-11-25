@@ -11,13 +11,14 @@ The tools that build [`architecture.md`](architecture.md). Every choice costs **
 | Pages | **Jinja2 templates** (comes with Flask), server-rendered HTML | No frontend framework to learn or deploy. |
 | Styling | **Plain CSS**, one file | 6 screens don't need a framework. |
 | Browser scripting | **A few lines of plain JavaScript** | Only for the submit confirmation, the job posting popup (`<dialog>`) and disabling the button while the AI works. |
-| Database | **SQLite**, via Python's built-in `sqlite3` | One file, no server, no cost. Enough for 10–15 students. |
+| Database | **SQLite**, via Python's built-in `sqlite3` | One file, no server, no cost. Enough for 5 students. |
 | Schema | `schema.sql` in the repo | Tables from [`data-model.md`](data-model.md), created by one command. |
 | Sessions | Flask's signed cookie session, 7-day lifetime | Built in. No extra service. |
 | Password hashing | `werkzeug.security` (comes with Flask) | Built in, salted hashes. |
 | Invite code hashing | `hashlib` SHA-256 (standard library) | Codes are random, so a plain hash is safe and can be looked up directly. |
 | AI model | **Google Gemini API, free tier**, a Flash-class model, no billing attached | Free, available in Jordan, and reachable from the free host. The exact model is chosen in the week-3 spike, from what the free tier offers then, and recorded in `decisions.md`. |
 | AI prompt | `app/ai/prompt.txt` in the repo | One place to read and change the instructions sent to the AI. |
+| Backup AI | **Llama through Groq, free tier**, no billing attached | Used only when Gemini fails twice. Free, and `api.groq.com` is on PythonAnywhere's free allowlist. Called with the same `requests` code; the exact Llama model is chosen in the week-5 spike (D69). |
 | Calling the AI | **requests** | One plain HTTPS call with a JSON body. Simpler to read and to fake in tests than a full SDK. |
 | Form protection | **Flask-WTF** (`CSRFProtect`) | Stops other sites submitting forms as a logged-in student. |
 | Config and secrets | **python-dotenv** + `.env` | Matches [`workflow.md`](workflow.md). |
@@ -62,10 +63,10 @@ pytest        # dev only
 
 | Limit | What I do |
 |---|---|
-| **Free PythonAnywhere accounts can only reach sites on its allowlist** | `.googleapis.com` (Gemini) is on it, checked November 2026. Groq, OpenRouter and Mistral are on it too, as backups. Proven with one real call in the week-3 spike. |
-| Gemini's free tier allows only a few requests per minute without billing | Enough for 10–15 students with at most 3 posting attempts each. If two students hit the limit together, the second sees the template fallback. Billing is never attached. |
+| **Free PythonAnywhere accounts can only reach sites on its allowlist** | `.googleapis.com` (Gemini) is on it, checked November 2026. `api.groq.com` (the backup, D69) is on it too, and so are OpenRouter and Mistral. Proven with one real call in the week-3 spike. |
+| Gemini's free tier allows only a few requests per minute without billing | Enough for 5 students with at most 3 posting attempts each. If two students hit the limit together, the second sees the template fallback. Billing is never attached. |
 | Free-tier AI terms may allow Google to use what is sent | Only the posting text is sent, never personal data (N7). |
-| One web app, one worker | While one student waits for the AI (up to about a minute), others wait too. Accepted for 10–15 students (D46). |
+| One web app, one worker | While one student waits for the AI (up to about a minute), others wait too. Accepted for 5 students (D46). |
 | The web app expires after **one month** if not renewed | Renew from the PythonAnywhere dashboard. Calendar reminder every 3 weeks, and in the week before Demo Night. |
 | 512 MiB disk | The database is text only; it stays far below this. |
 | Limited daily CPU time | Waiting for the AI uses almost no CPU. Pages are simple. |

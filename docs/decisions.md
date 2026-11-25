@@ -117,6 +117,8 @@ A model that had never seen the project read the folder and asked these. These a
 | D65 | 2026-11-11 | New field `roadmaps.project_goal`: one sentence on what the student will have built by day 10, shown on the Roadmap screen. Templates carry it; the AI must return it; a plan without it fails the check | Designing the Roadmap screen showed it lacked a destination: a list of tasks with no picture of the finished project. The data did not exist, so it was added on purpose | Leaving the screen without a goal; deriving the goal from the last day's title | — |
 | D66 | 2026-11-11 | Pastel look: soft backgrounds (lavender, mint, peach, sky) with dark text and a deep lavender for buttons | Calm and encouraging for a learning tool; dark text keeps it readable | The first blue-and-grey design, which felt too plain | — |
 | D67 | 2026-11-11 | Final look "Sky & lilac": sky-blue band at the top, lilac for the goal and the Today label, blue buttons, dark text. New layout: a top band with the role, the project goal, a progress ring and a 10-step journey line; today's task large on the left; a compact list of the 10 days on the right | Chosen from seven styles on the design canvas. The most neutral pastel for a mixed group of IT students; the first layout felt like a plain list | Midnight (dark), Sunrise (teal and coral), Peach & mint, Butter & rose (read as aimed at girls), Butter & teal | D66 |
+| D68 | 2026-11-25 | Invite **5** students instead of 10–15. Success stays at least 3 completions | Less to manage alongside coursework, and the AI free tiers stay far below their limits. Fewer than 5 would mean almost everyone must finish | 3 students (all would have to finish); 10–15 | D37, D41 (numbers only) |
+| D69 | 2026-11-25 | Backup AI: if Gemini fails twice, the app tries once with **Llama through Groq** (free tier, no billing), with the same plan check. Only if both fail does the student see the error and the templates | Fixed templates cannot cover every IT role (a QA student would get Frontend or Data Analyst). A second model makes "no plan" rare | Templates as the only fallback; a third provider | Extends D34, D55 |
 
 ## Arguments with the model
 
@@ -143,4 +145,5 @@ Written down so the test can prove them wrong:
 - [x] README: one-liner and status updated.
 - [ ] Week-3 spike: one real AI call from PythonAnywhere (D54, D55, A5).
 - [x] Plans shortened to 10 days (D64): all docs, README, brief and workflow updated.
+- [ ] Add `GROQ_API_KEY=replace-me` to `.env.example` in workflow.md (D69).
 - [ ] Confirm the Demo Night date and write it in `plan.md`.

@@ -1,6 +1,6 @@
 # Career Roadmap: plan
 
-A web app for 10–15 invited IT students in Jordan. A student pastes a real job posting, the AI turns it into a 10-day plan of 30-minute tasks, and each day unlocks only when the student submits a link to the work they did. The hard parts: the AI plan must be checked before anyone sees it, a student must never edit past work or see another student's, and it all has to run at zero cost on a free host, live on Demo Night.
+A web app for 5 invited IT students in Jordan. A student pastes a real job posting, the AI turns it into a 10-day plan of 30-minute tasks, and each day unlocks only when the student submits a link to the work they did. The hard parts: the AI plan must be checked before anyone sees it, a student must never edit past work or see another student's, and it all has to run at zero cost on a free host, live on Demo Night.
 
 ## Read in this order
 
