@@ -5,11 +5,21 @@ init-db command calls this module instead of running SQL itself.
 """
 
 import sqlite3
+from datetime import datetime, timezone
 from pathlib import Path
 
 from flask import current_app
 
 SCHEMA_PATH = Path(__file__).resolve().parents[2] / "schema.sql"
+
+
+def utc_now():
+    """The current server time as ISO 8601 text in UTC.
+
+    One function for every timestamp, so all of them share the format
+    schema.sql expects (rules.md section 9) and none come from the user.
+    """
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
 def get_connection():
