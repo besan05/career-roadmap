@@ -1,7 +1,7 @@
 """The only code that talks to the AI models (rules.md section 7).
 
 First version, from ticket 02: one call to Gemini and one to the backup,
-Llama through Groq (D69). Ticket 10 adds prompt.txt, the plan check, the
+a model through Groq (D69, D70). Ticket 10 adds prompt.txt, the plan check, the
 retry and the fallback on top of these two functions.
 
 Keys and model names come from environment variables only, loaded from
@@ -65,7 +65,7 @@ def ask_gemini(text):
 
 
 def ask_groq(text):
-    """Send text to Llama through Groq and return its answer as a string."""
+    """Send text to the backup model through Groq and return its answer as a string."""
     key = _setting("Groq", "GROQ_API_KEY")
     model = _setting("Groq", "GROQ_MODEL")
     data = _post(
