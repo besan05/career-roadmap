@@ -30,6 +30,8 @@ def create_app(test_config=None):
         SECRET_KEY=os.environ.get("SECRET_KEY"),
         DATABASE_PATH=os.environ.get("DATABASE_PATH"),
         APP_ENV=os.environ.get("APP_ENV", "dev"),
+        # TEMPORARY (ticket 02): removed with the spike page.
+        SPIKE_PAGE=os.environ.get("SPIKE_PAGE", "off"),
     )
     if test_config is not None:
         app.config.update(test_config)
@@ -42,6 +44,14 @@ def create_app(test_config=None):
     # Every form has CSRF protection (rules.md section 6).
     csrf.init_app(app)
     app.cli.add_command(init_db_command)
+
+    # TEMPORARY (ticket 02): the AI spike page exists only on the deployed
+    # app, and only while SPIKE_PAGE=on, so it can never run on a laptop.
+    # Removed, with app/routes/spike.py, before ticket 02 closes.
+    if app.config["APP_ENV"] == "production" and app.config["SPIKE_PAGE"] == "on":
+        from .routes.spike import bp as spike_bp
+
+        app.register_blueprint(spike_bp)
 
     # Temporary placeholder so `flask run` shows something.
     # Removed in ticket 06, when the real screens arrive.
