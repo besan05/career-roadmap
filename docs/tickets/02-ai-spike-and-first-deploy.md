@@ -10,9 +10,10 @@ The biggest unknown is whether the free host can reach the AI (A5). It is proven
 
 - [ ] The skeleton from ticket 01 runs on PythonAnywhere at its public address
 - [ ] A temporary page, only on the deployed app, sends one fixed question to Gemini and shows the answer
-- [ ] The AI key comes from `.env` on PythonAnywhere and never appears in the code, the page or a commit (N6)
-- [ ] If Gemini fails from PythonAnywhere, Groq is tried, then OpenRouter (D55)
-- [ ] The provider and exact model that worked are recorded in `decisions.md`; if all fail, "templates only" is recorded and A5 marked failed
+- [ ] Both AI keys come from `.env` on PythonAnywhere and never appears in the code, the page or a commit (N6)
+- [ ] The same page also sends the question once to the backup, Llama through Groq, and shows that answer too (D69)
+- [ ] If Gemini fails from PythonAnywhere, Groq becomes the main model; if both fail, OpenRouter is tried (D55)
+- [ ] The providers and exact models that worked (Gemini and Llama) are recorded in `decisions.md`; if all fail, "templates only" is recorded and A5 marked failed
 - [ ] The temporary page is removed before the ticket is closed
 
 ## Touches

@@ -102,6 +102,7 @@ No staging environment for the MVP. To make up for it, every change is tested lo
   GEMINI_API_KEY=replace-me
   AI_MODE=fake
   APP_ENV=dev
+  GROQ_API_KEY=replace-me
 ```
 
 - Every new variable goes into `.env.example` in the same pull request that introduces it.

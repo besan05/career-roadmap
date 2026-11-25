@@ -10,8 +10,8 @@ The posting is what makes this different from roadmap.sh (D33). Uses what ticket
 
 - [ ] `app/ai/prompt.txt` asks for the four things in R6b and for JSON with `role_title`, `project_goal` and 10 days
 - [ ] Only the posting text and the prompt are sent to the AI; never an email, name or progress (N7)
-- [ ] A plan is saved only if it has a role title, a project goal and exactly 10 days with all fields (R6); otherwise the AI is asked once more
-- [ ] A second failure, a timeout (30 seconds per try) or an outage shows the template fallback message; the student never sees raw AI output
+- [ ] A plan is saved only if it has a role title, a project goal and exactly 10 days with all fields (R6); otherwise Gemini is asked once more, then the backup model (Llama through Groq) once (D69)
+- [ ] If all three tries fail, a timeout (30 seconds per try) or an outage shows the template fallback message; the student never sees raw AI output
 - [ ] A refusal ("not an IT job posting") shows the R5b message and saves nothing
 - [ ] Tries count only when the AI answers; after 3 counted tries only templates are offered (D57)
 - [ ] Postings over 6,000 characters and empty postings are refused before any call

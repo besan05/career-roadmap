@@ -66,7 +66,7 @@ tests/
 - Only code in `app/ai/` calls the AI model, and only from the server. The key never reaches the browser (N6).
 - Only the pasted posting and the instructions in `app/ai/prompt.txt` are sent. Never an email, name or progress (N7).
 - Every response is checked before saving: a role title, a project goal, exactly 10 days, in order, each with a title, instructions and expected evidence (R6).
-- Each attempt times out after 30 seconds. A failed check or timeout is retried once. A second failure shows the template fallback (R7). The student never sees raw AI output or an error page.
+- Each attempt times out after 30 seconds. A failed check or timeout is retried once with Gemini, then tried once with the backup model, Llama through Groq. If that fails too, the template fallback is shown (R7, D69). The student never sees raw AI output or an error page.
 - A posting attempt is counted once, only when the AI answers. The retry, timeouts, outages and rate limits never count. After 3 counted attempts, only templates are offered (R5).
 - If the AI refuses a text that is not an IT job posting, nothing is saved and the R5b message is shown.
 - Tests never call the real AI. They use the saved answers in `tests/fake_ai/`, including broken ones.

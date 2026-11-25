@@ -1,0 +1,14 @@
+# Secrets: never committed (workflow.md)
+.env
+
+# Databases and anything else the app writes at runtime
+instance/
+
+# Python leftovers
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/

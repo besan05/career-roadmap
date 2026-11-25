@@ -10,7 +10,7 @@ Final-year IT students and fresh IT graduates in Jordan cannot turn what they st
 
 Final-year IT students and fresh IT graduates in Jordan who are targeting a junior role and feel the gap between their degree and real job postings.
 
-MVP test group: 10–15 invited students from my college.
+MVP test group: 5 invited students from my college.
 
 ## 3. Today, Without It
 
@@ -24,7 +24,7 @@ Common outcome: students stop at the first hands-on task, with no one asking "wh
 
 Measured at week 8, just before Demo Night:
 
-- **Success:** at least 3 of the 10–15 invited students complete a 10-day roadmap within 14 days, and I review their final project.
+- **Success:** at least 3 of the 5 invited students complete a 10-day roadmap within 14 days, and I review their final project.
 - **Failure:** zero completions, or all participants drop out within the first 3 days.
 
 Tracked during the test:

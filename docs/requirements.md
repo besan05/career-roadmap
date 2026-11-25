@@ -6,7 +6,7 @@ What the MVP must do and must never do. Every item fits inside [`scope.md`](scop
 
 | User | Who | How many |
 |---|---|---|
-| **Student** | A final-year or newly graduated IT student I invite | 10–15 during the test |
+| **Student** | A final-year or newly graduated IT student I invite | 5 during the test |
 | **Creator** | Me: builds the app, manages invites, reviews work | 1 |
 | **Demo Student** | An account used only on Demo Night and in rehearsals | 1, excluded from all measurement |
 
@@ -43,8 +43,8 @@ Done when: a deliberately broken response (9 days, a missing field, no role titl
 **R6b Plan content.** The instructions sent to the AI (`app/ai/prompt.txt`) ask for: one project sized for 10 × 30 minutes; day 1 sets up a public repository; tasks point to existing free lessons instead of teaching from scratch; the expected evidence of every day is something that can be linked. The code checks only the structure (R6); content is checked by me reading sample plans.
 Done when: `prompt.txt` asks for all four, and three plans made from real postings meet them when I read them (A4).
 
-**R7 Template fallback.** If the second attempt also fails, or the AI service is unavailable or times out, the student sees a short message and the role templates.
-Done when: with the AI key switched off, pasting a posting shows the message and the template list, not an error page.
+**R7 Backup AI, then fallback.** If Gemini fails twice (a broken plan, a timeout or an error), the app sends the same posting and instructions once to the backup model, Llama through Groq, and applies the same check (R6). If that also fails, or both services are unavailable, the student sees a short message ("try again in a few minutes; your tries were not used") and the role templates.
+Done when: with the Gemini key switched off, a posting still gets a plan from the backup; with both keys switched off, the message and the template list appear, not an error page.
 
 **R8 Role templates.** The app ships with pre-written 10-day plans, at least *Junior Frontend Developer* and *Junior Data Analyst*. Picking one loads it immediately.
 Done when: picking each template shows its 10-day plan without any AI call.
@@ -125,7 +125,7 @@ Done when: the request sent to the AI contains only the posting and the instruct
 
 Supports section 4 of [`brief.md`](brief.md). The Demo Student is excluded from every number.
 
-- **Invited:** 10–15 students.
+- **Invited:** 5 students.
 - **Completed:** all 10 days submitted within **10 days** of the student's start time, and marked reviewed by the creator.
 - **Success:** at least **3** students complete.
 - **Recorded automatically:** start time, every submission time, current day. From these: completions, days taken, and the day each dropout stopped.
