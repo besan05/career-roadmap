@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_wtf import CSRFProtect
 
-from .cli import init_db_command
+from .cli import register_commands
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -41,7 +41,7 @@ def create_app(test_config=None):
 
     # Every form has CSRF protection (rules.md section 6).
     csrf.init_app(app)
-    app.cli.add_command(init_db_command)
+    register_commands(app)
 
     # Temporary placeholder so `flask run` shows something.
     # Removed in ticket 06, when the real screens arrive.
