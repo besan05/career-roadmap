@@ -31,7 +31,7 @@ The shape of the system: what parts exist and what each is responsible for. Spec
 | **AI client** | Sends a pasted posting with the instructions in `app/ai/prompt.txt` to the AI model and returns its answer. 30-second timeout per attempt. | Sends anything personal (N7). Saves anything. Decides whether a plan is valid: that is Rules' job. |
 | **Data access** | All reads and writes to the database, following [`data-model.md`](data-model.md). | Changes a submission, except `unlock` setting `replaced_at` once. Deletes one, except through `reset-demo`. |
 | **Database** | Stores users, invite codes, roadmaps, days and submissions. | Holds files or names. |
-| **AI model** | Gemini first; Llama through Groq as the backup (D69). Turns a posting into a role title and a 10-day plan in the agreed JSON shape. | Is trusted: its answer is always checked before saving. |
+| **AI model** | Gemini first (`gemini-3.5-flash-lite`, D71); `openai/gpt-oss-120b` through Groq as the backup (D69, D70). Turns a posting into a role title and a 10-day plan in the agreed JSON shape. | Is trusted: its answer is always checked before saving. |
 | **plans/** | Pre-written 10-day templates as JSON files in the repo. | Changes a student's plan after it has been copied. |
 | **Creator scripts** | The creator's actions, run from the command line. Each validates its input before writing. | Runs inside the web app or has a screen. |
 
@@ -78,7 +78,7 @@ Any failed check → no account is created, and the student sees why.
 4. If the AI answers, the attempt is counted once (the retry below never counts again). Timeouts, outages and rate limits are not counted.
 5. If the AI refused (not an IT job posting) → nothing is saved; the student sees the R5b message.
 6. Rules check the answer: a role title, a project goal, exactly 10 days, numbered 1–10, all fields filled.
-7. If the check fails or the call times out, steps 3 and 6 run once more with Gemini. If that fails too, they run once with the backup model (Llama through Groq) (D69).
+7. If the check fails or the call times out, steps 3 and 6 run once more with Gemini. If that fails too, they run once with the backup model through Groq (D69, D70).
 8. Valid → a roadmap and its 10 days are saved with `started_at` from the server; **Roadmap** opens on day 1.
 9. Second failure or AI error → nothing is saved; the student sees a short message and the templates.
 

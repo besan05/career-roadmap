@@ -43,7 +43,7 @@ Done when: a deliberately broken response (9 days, a missing field, no role titl
 **R6b Plan content.** The instructions sent to the AI (`app/ai/prompt.txt`) ask for: one project sized for 10 × 30 minutes; day 1 sets up a public repository; tasks point to existing free lessons instead of teaching from scratch; the expected evidence of every day is something that can be linked. The code checks only the structure (R6); content is checked by me reading sample plans.
 Done when: `prompt.txt` asks for all four, and three plans made from real postings meet them when I read them (A4).
 
-**R7 Backup AI, then fallback.** If Gemini fails twice (a broken plan, a timeout or an error), the app sends the same posting and instructions once to the backup model, Llama through Groq, and applies the same check (R6). If that also fails, or both services are unavailable, the student sees a short message ("try again in a few minutes; your tries were not used") and the role templates.
+**R7 Backup AI, then fallback.** If Gemini fails twice (a broken plan, a timeout or an error), the app sends the same posting and instructions once to the backup model through Groq (D70), and applies the same check (R6). If that also fails, or both services are unavailable, the student sees a short message ("try again in a few minutes; your tries were not used") and the role templates.
 Done when: with the Gemini key switched off, a posting still gets a plan from the backup; with both keys switched off, the message and the template list appear, not an error page.
 
 **R8 Role templates.** The app ships with pre-written 10-day plans, at least *Junior Frontend Developer* and *Junior Data Analyst*. Picking one loads it immediately.

@@ -109,3 +109,32 @@ Every prompt used to think this project through, in order: what I asked, and wha
 ### 22. Cutting tickets
 **Asked:** Cut the design into tickets with Why, Done when and Touches.
 **Decided:** 14 tickets. The student loop works without AI after ticket 08; the AI spike comes second to answer the biggest risk early.
+## Task 05 — First three tickets
+
+### 23. Ticket 01: plan before code
+**Asked:** Plan ticket 01 from plan.md, the ticket, rules.md and workflow.md, with no code yet.
+**Decided:** The model asked six good questions (placeholder page, `init-db` now, `pytest.ini`, no cascade, a consent CHECK, `GROQ_API_KEY`). It also planned to edit docs/, which I forbade.
+
+### 24. Ticket 01: reviewing my first pull request
+**Asked:** Review PR #1 on GitHub as a stranger before merging.
+**Decided:** Found a real `SECRET_KEY` in `.env.example` on a public repo. Sent it back, replaced it with `replace-me`, rotated the key, then merged (D79).
+
+### 25. Ticket 02: plan
+**Asked:** Plan the AI client and a temporary page that calls Gemini and Groq once each, plus the PythonAnywhere deploy steps.
+**Decided:** Keys go in headers, never the URL. The page only exists when `APP_ENV=production` and `SPIKE_PAGE=on`. It is tested from the feature branch and never merged (D72). Only a proxy or connection error counts as "Gemini fails" (D73). Model names go in `.env` (D74).
+
+### 26. Ticket 02: the spike on the real host
+**Asked:** Which models does my key actually have, from PythonAnywhere?
+**Decided:** Both providers answered (A5 passed). Groq has no Llama chat model any more, so the backup is `openai/gpt-oss-120b` (D70). `gemini-3.5-flash` timed out at 30 s; `gemini-3.5-flash-lite` answered in 0.9 s (D71).
+
+### 27. Ticket 02: review
+**Asked:** Review PR #2 as a stranger.
+**Decided:** Three files only, no secrets. Sent back the docstrings that still said "Llama", then merged.
+
+### 28. Ticket 03: plan
+**Asked:** Plan the creator, invite and demo scripts with no new packages.
+**Decided:** Werkzeug for passwords, unsalted SHA-256 for random invite codes (D76). The model found that the Demo Student has no consent time; it is the creation time (D75). One creator, checked in code (D77). One shared email check (D78).
+
+### 29. Ticket 03: review
+**Asked:** Review PR #3 as a stranger.
+**Decided:** 52 tests pass. Accepted the unplanned `utc_now()` in `db.py`. Rejected the model's advice never to run the scripts on production: architecture.md says to run them there, deliberately.

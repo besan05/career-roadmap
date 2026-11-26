@@ -30,7 +30,7 @@ Students, the Demo Student and the creator.
 | `password_hash` | text | Hashed. The real password is never stored |
 | `role` | `student` \| `creator` | Only `creator` can open the progress view (N5) |
 | `is_demo` | yes/no | Yes only for the Demo Student. Excluded from measurement |
-| `consented_at` | timestamp, nullable | When the student ticked "I agree" (R1b). Empty only for the creator |
+| `consented_at` | timestamp, nullable | When the student ticked "I agree" (R1b). For the Demo Student, its creation time (D75). Empty only for the creator |
 | `posting_attempts` | integer | Counted attempts from a posting before day 1: only when the AI answered. At most 3 (R5) |
 | `created_at` | timestamp | Set by the server |
 
@@ -41,7 +41,7 @@ Single-use codes that allow a student to sign up (R1). Codes do not expire.
 | Field | Type | Notes |
 |---|---|---|
 | `id` | id | Primary key |
-| `code_hash` | text, unique | Hashed. The real code is printed once and never stored |
+| `code_hash` | text, unique | SHA-256 of the code after removing hyphens and spaces and uppercasing it; no salt, because codes are random (D76). The real code is printed once and never stored |
 | `created_at` | timestamp | Set by the server |
 | `used_by` | → `users.id`, nullable | Empty = unused |
 | `used_at` | timestamp, nullable | Set when a student signs up with it |
@@ -159,7 +159,7 @@ All done with the scripts in [`architecture.md`](architecture.md).
 |---|---|
 | Create the creator account | Insert a `users` row with `role = creator` |
 | Create an invite code | Insert an `invite_codes` row |
-| Create the Demo Student | Insert a `users` row with `is_demo = yes` |
+| Create the Demo Student | Insert a `users` row with `role = student`, `is_demo = yes`, and `consented_at` set to the creation time, consented by the creator on its behalf (D75) |
 | Reset a password | Replace `users.password_hash` |
 | Unlock a mistake | Set `replaced_at` on the active submission |
 | Mark reviewed | Set `roadmaps.reviewed_at` |

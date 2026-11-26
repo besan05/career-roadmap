@@ -16,9 +16,9 @@ The tools that build [`architecture.md`](architecture.md). Every choice costs **
 | Sessions | Flask's signed cookie session, 7-day lifetime | Built in. No extra service. |
 | Password hashing | `werkzeug.security` (comes with Flask) | Built in, salted hashes. |
 | Invite code hashing | `hashlib` SHA-256 (standard library) | Codes are random, so a plain hash is safe and can be looked up directly. |
-| AI model | **Google Gemini API, free tier**, a Flash-class model, no billing attached | Free, available in Jordan, and reachable from the free host. The exact model is chosen in the week-3 spike, from what the free tier offers then, and recorded in `decisions.md`. |
+| AI model | **Google Gemini API, free tier**, a Flash-class model, no billing attached | Free, available in Jordan, and reachable from the free host. Chosen in the week-5 spike: `gemini-3.5-flash-lite` (D71). The model name lives in `.env` (D74). |
 | AI prompt | `app/ai/prompt.txt` in the repo | One place to read and change the instructions sent to the AI. |
-| Backup AI | **Llama through Groq, free tier**, no billing attached | Used only when Gemini fails twice. Free, and `api.groq.com` is on PythonAnywhere's free allowlist. Called with the same `requests` code; the exact Llama model is chosen in the week-5 spike (D69). |
+| Backup AI | **`openai/gpt-oss-120b` through Groq, free tier**, no billing attached | Used only when Gemini fails twice. Free, and `api.groq.com` is on PythonAnywhere's free allowlist. Called with the same `requests` code. Groq no longer offers a Llama chat model, so the week-5 spike chose this one (D69, D70). |
 | Calling the AI | **requests** | One plain HTTPS call with a JSON body. Simpler to read and to fake in tests than a full SDK. |
 | Form protection | **Flask-WTF** (`CSRFProtect`) | Stops other sites submitting forms as a logged-in student. |
 | Config and secrets | **python-dotenv** + `.env` | Matches [`workflow.md`](workflow.md). |
@@ -63,7 +63,7 @@ pytest        # dev only
 
 | Limit | What I do |
 |---|---|
-| **Free PythonAnywhere accounts can only reach sites on its allowlist** | `.googleapis.com` (Gemini) is on it, checked November 2026. `api.groq.com` (the backup, D69) is on it too, and so are OpenRouter and Mistral. Proven with one real call in the week-3 spike. |
+| **Free PythonAnywhere accounts can only reach sites on its allowlist** | `.googleapis.com` (Gemini) is on it, checked November 2026. `api.groq.com` (the backup, D69) is on it too, and so are OpenRouter and Mistral. Proven on 2026-11-25 with one real call to each from PythonAnywhere (ticket 02, D71). |
 | Gemini's free tier allows only a few requests per minute without billing | Enough for 5 students with at most 3 posting attempts each. If two students hit the limit together, the second sees the template fallback. Billing is never attached. |
 | Free-tier AI terms may allow Google to use what is sent | Only the posting text is sent, never personal data (N7). |
 | One web app, one worker | While one student waits for the AI (up to about a minute), others wait too. Accepted for 5 students (D46). |

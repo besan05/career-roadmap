@@ -8,12 +8,12 @@ Every other ticket needs a running app, a database and a test runner. This one i
 
 ## Done when
 
-- [ ] `flask run` starts the app and shows a placeholder page on the laptop
-- [ ] `schema.sql` creates every table in `data-model.md`, with every field, including `project_goal`, `is_demo`, `consented_at` and `posting_attempts`
-- [ ] The folders match `rules.md` section 3 (`app/routes`, `rules`, `data`, `ai`, `templates`, `static`, `cli.py`, `plans/`, `tests/fake_ai/`)
-- [ ] `.env.example` lists every variable from `workflow.md`; `.gitignore` covers `.env` and `instance/`
-- [ ] `pytest` runs and one test passes
-- [ ] `requirements.txt` holds only the dependencies in `stack.md`
+- [x] `flask run` starts the app and shows a placeholder page on the laptop
+- [x] `schema.sql` creates every table in `data-model.md`, with every field, including `project_goal`, `is_demo`, `consented_at` and `posting_attempts`
+- [x] The folders match `rules.md` section 3 (`app/routes`, `rules`, `data`, `ai`, `templates`, `static`, `cli.py`, `plans/`, `tests/fake_ai/`)
+- [x] `.env.example` lists every variable from `workflow.md`; `.gitignore` covers `.env` and `instance/`
+- [x] `pytest` runs and one test passes
+- [x] `requirements.txt` holds only the dependencies in `stack.md`
 
 ## Touches
 
