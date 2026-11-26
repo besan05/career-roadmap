@@ -120,6 +120,21 @@ A model that had never seen the project read the folder and asked these. These a
 | D68 | 2026-11-25 | Invite **5** students instead of 10–15. Success stays at least 3 completions | Less to manage alongside coursework, and the AI free tiers stay far below their limits. Fewer than 5 would mean almost everyone must finish | 3 students (all would have to finish); 10–15 | D37, D41 (numbers only) |
 | D69 | 2026-11-25 | Backup AI: if Gemini fails twice, the app tries once with **Llama through Groq** (free tier, no billing), with the same plan check. Only if both fail does the student see the error and the templates | Fixed templates cannot cover every IT role (a QA student would get Frontend or Data Analyst). A second model makes "no plan" rare | Templates as the only fallback; a third provider | Extends D34, D55 |
 
+## Build (Task 05: tickets 01–03)
+
+| # | Date | Decision | Why | Rejected | Replaces |
+|---|---|---|---|---|---|
+| D70 | 2026-11-25 | The backup model is **`openai/gpt-oss-120b`** through Groq, not Llama. D69 stays: same order, same check | The spike listed Groq's models from PythonAnywhere: the only Llama models left are `llama-prompt-guard`, which are safety filters, not chat models. gpt-oss-120b answered in 0.4–0.6 s | `qwen/qwen3.8-27b` (kept as the next option); OpenRouter | D69 (model only) |
+| D71 | 2026-11-25 | Gemini model is **`gemini-3.5-flash-lite`**. **A5 passed:** PythonAnywhere reaches both Gemini and Groq | `gemini-3.5-flash` took 30.1 s for a one-word answer, then timed out on the second try. The lite model answered in 0.9 s, well inside the 30-second limit | `gemini-3.5-flash`; raising the 30-second timeout | — |
+| D72 | 2026-11-25 | The temporary spike page was tested by checking out the feature branch on PythonAnywhere, and was deleted before the pull request. It never reached `main`. One-time exception to "production is deployed from `main`" | The page had to run on the real host, but it is throwaway code; one PR keeps `main` clean | Two PRs (add the page, then remove it) | — |
+| D73 | 2026-11-25 | Only a proxy 403 or a connection error counts as "Gemini fails from PythonAnywhere" (D55). A 429 or a zero quota means: try another Gemini model first | A quota problem is fixed by changing the model, not the provider | Treating every error the same | Extends D55 |
+| D74 | 2026-11-25 | AI model names live in `.env` (`GEMINI_MODEL`, `GROQ_MODEL`), not in the code | Free models change often; a model can be swapped on the server without a commit, as happened in the spike | Constants in `client.py` | — |
+| D75 | 2026-11-25 | The Demo Student has `role = student`, and its `consented_at` is its creation time, consented by the creator on its behalf | The schema requires consent for every student, but the Demo Student never sees the sign-up screen. Found by the model while planning ticket 03 | Allowing an empty `consented_at` for demo accounts (would weaken the CHECK) | — |
+| D76 | 2026-11-25 | Invite codes: 12 characters with no look-alikes (no 0/O, 1/I/l), printed as `ABCD-EFGH-JKMN`. Stored as SHA-256 after removing hyphens and spaces and uppercasing, with no salt. One shared function, `hash_invite_code()` | Students type the code by hand. The codes are random, so an unsalted hash is safe, and sign-up can look the code up directly | `token_urlsafe` codes (hard to type); a salted hash (sign-up would have to test every code) | — |
+| D77 | 2026-11-25 | "Only one creator" is checked in code, not in the schema | Changing the schema would mean recreating dev.db for a rule only one script can break | A partial unique index on `role = 'creator'` | — |
+| D78 | 2026-11-25 | Email check: trimmed, lowercased, one @ with text and a dot after it, no spaces. One shared function, `normalize_email()` in `app/data/users.py`, used by the scripts and by sign-up (ticket 04) | Enough for 5 known testers (D52); one function means the scripts and sign-up never disagree | A full email regex; sending a confirmation email | — |
+| D79 | 2026-11-25 | The dev `SECRET_KEY` committed in `.env.example` (PR #1) was replaced with `replace-me` and rotated. The git history is **not** rewritten. One-time exception to workflow.md ("remove it from the history") | It was a local dev key, never used in production, and it is already rotated, so the old value unlocks nothing. Rewriting `main` with a force-push is riskier than the leak | Rewriting history with `git filter-repo` and a force-push | — |
+
 ## Arguments with the model
 
 - **Country-based plans.** I wanted plans per country. The model pointed out this needs the market data I already ruled out in Task 01, and that a local posting already gives a local plan. I agreed (D42).
@@ -136,14 +151,17 @@ Written down so the test can prove them wrong:
 - **A2:** students will accept a template when the AI fails.
 - **A3:** 14 tasks of about 30 minutes produce a project worth reviewing.
 - **A4 (from D33):** AI plans from real local postings are good enough without my review.
-- **A5 (from D33):** the Gemini free tier stays available, and reachable from PythonAnywhere, until Demo Night.
+- **A5 (from D33):** the Gemini free tier stays available, and reachable from PythonAnywhere, until Demo Night. **Reachable: passed 2026-11-25 (ticket 02, D71).** Still has to stay available until Demo Night.
 
 ## Follow-ups from these decisions
 
 - [x] ~~README and `brief.md`: custom plans within 24 hours (D6)~~ Replaced by D33.
 - [x] `brief.md`: sections 2, 4 and 5 updated for D33, D37 and D41.
 - [x] README: one-liner and status updated.
-- [ ] Week-3 spike: one real AI call from PythonAnywhere (D54, D55, A5).
+- [x] AI spike: one real call to Gemini and to Groq from PythonAnywhere, done in week 5 (D70, D71).
 - [x] Plans shortened to 10 days (D64): all docs, README, brief and workflow updated.
-- [ ] Add `GROQ_API_KEY=replace-me` to `.env.example` in workflow.md (D69).
+- [x] Add `GROQ_API_KEY`, `GEMINI_MODEL` and `GROQ_MODEL` to the `.env.example` sample in workflow.md (D69, D74).
 - [ ] Confirm the Demo Night date and write it in `plan.md`.
+- [ ] Make separate production keys for Gemini and Groq. Today the same keys are in both `.env` files, which breaks workflow.md ("dev and production use separate keys").
+- [ ] On PythonAnywhere, deliberately: `flask --app app create-creator` with my email, then 5 × `flask --app app create-invite` before the test (D49, D68).
+- [ ] Remove the leftover `SPIKE_PAGE` line from the production `.env` (harmless, but no longer used).
